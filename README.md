@@ -3,18 +3,18 @@
 This document explains how to set up the Sfmsf06 sensor to run on a Raspberry Pi
 using the provided code.
 
-TODO: DRIVER_GENERATOR Add picture of sensor to images/Sfmsf06.png
-[<center><img src="images/SFMSF06.png" width="300px"></center>](TODO: DRIVER_GENERATOR Add evaluation kit URL)
 
-Click [here](TODO: DRIVER_GENERATOR Add evaluation kit URL) to learn more about the Sfmsf06 Sensor Evaluation Kit Board.
+[<center><img src="images/sfm3119.png" width="300px"></center>](https://github.com/Sensirion/raspberry-pi-i2c-sfmSf06)
+
+Click [here](https://www.sensirion.com/en/flow-sensors/) to learn more about the Sensirion Sfmsf06 flow sensors.
 
 
 ## Setup Guide
 
 ### Connecting the Sensor
 
-Your sensor has the four different connectors: VCC, GND, SDA, SCL, SEL. Use
-the following pins to connect your Sfmsf06:
+Your sensor has the four different connectors: VCC, GND, SDA, SCL. Use
+the following pins to connect your Sfmsf06 (example product: SFM-3119):
 
  *Sfmsf06*  |    *Raspberry Pi*
  :------: | :------------------:
@@ -22,9 +22,10 @@ the following pins to connect your Sfmsf06:
    GND    |        Pin 6
    SDA    |        Pin 3
    SCL    |        Pin 5
-   SEL    |        Pin 9 TODO: DRIVER_GENERATOR Check if this applies
+
 
 <center><img src="images/GPIO-Pinout-Diagram.png" width="900px"></center>
+<center><img src="images/sfm3119_pinout.png" width="900px"></center>
 
 ### Raspberry Pi
 
@@ -48,7 +49,19 @@ the following pins to connect your Sfmsf06:
 
       Output:
       ```
-      TODO: DRIVER_GENERATOR Add sensor output
+     
+     Product identifier: 67371397
+     Serial number: 0, 0, 0, 0, 120, 209, 158, 83, 
+        flow	 temperature	      status
+      -24574	        5318	        3071
+      -24574	        5323	        3071
+      -24574	        5336	        3071
+      -24575	        5334	        3071
+      -24574	        5324	        3071
+      -24574	        5334	        3071
+      -24573	        5329	        3071
+      -24574	        5344	        3071
+
       ...
       ```
 
@@ -73,7 +86,10 @@ $ sudo apt-get install build-essential
 If you run `./sfmSf06_i2c_example_usage` but do not get sensor readings but something like this instead
 
 ```
-TODO: DRIVER_GENERATOR Add sensor output in error case
+Error executing sfm_sf06_stop_continuous_measurement(): -1
+Error executing sfm_sf06_read_product_identifier(): -1
+Error executing sfm_sf06_start_o2_continuous_measurement(): -1
+
 ...
 ```
 
