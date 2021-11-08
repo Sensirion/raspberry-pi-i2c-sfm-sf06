@@ -51,6 +51,10 @@ int main(void) {
 
     sensirion_i2c_hal_init();
 
+    /**
+     * select the proper i2c address for your sensor
+     * see datasheet of your sensor
+     */
     init_driver(ADDR_SFM3119);
 
     error = sfm_sf06_stop_continuous_measurement();
