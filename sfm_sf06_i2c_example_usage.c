@@ -90,7 +90,7 @@ int main(void) {
         return error;
     }
     printf("%-12s\t%-12s\t%-12s", "flow", "temperature", "status\n");
-    // measurement runs e.g. one min
+    // measurement runs ~30 s
     for (int i = 0; i < 60; i++) {
         // Read Measurement
         float flow = 0.0;
