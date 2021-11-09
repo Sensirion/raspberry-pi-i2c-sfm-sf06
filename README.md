@@ -1,6 +1,6 @@
-# Sensirion Raspberry Pi I2C sfm-sf06 Driver
+# Sensirion Raspberry Pi I2C SFM-SF06 Driver
 
-This document explains how to set up the sfm-sf06 sensor to run on a Raspberry Pi
+This document explains how to set up the SFM-SF06 sensor to run on a Raspberry Pi
 using the provided code. The current code example uses the sensor *SFM3119*
 
 [<center><img src="images/sfm3119.png" width="300px"></center>](https://github.com/Sensirion/raspberry-pi-i2c-sfm-sf06)
@@ -14,7 +14,7 @@ Other supported products are:
  * SFM3019
 
 
-Click [here](https://www.sensirion.com/flow-sensors/) to learn more about the Sensirion sfm-sf06 flow sensors.
+Click [here](https://www.sensirion.com/flow-sensors/) to learn more about the Sensirion SFM-SF06 flow sensors.
 
 
 ## Setup Guide
@@ -22,9 +22,9 @@ Click [here](https://www.sensirion.com/flow-sensors/) to learn more about the Se
 ### Connecting the Sensor
 
 Your sensor has the four different connectors: VCC, GND, SDA, SCL. Use
-the following pins to connect your sfm-sf06 (example product: SFM-3119):
+the following pins to connect your SFM-SF06 (example product: SFM-3119):
 
- *sfm-sf06* |    *Raspberry Pi*
+ *SFM-SF06* |    *Raspberry Pi*
  :------:   | :------------------:
    VCC      |        Pin 1
    GND      |        Pin 6
@@ -33,7 +33,7 @@ the following pins to connect your sfm-sf06 (example product: SFM-3119):
 
 
 <center><img src="images/GPIO-Pinout-Diagram.png" width="900px"></center>
-<center><img src="images/sfm3119_pinout.png" width="900px"></center>
+<center><img src="images/sfm3119_pinout.png" width="450px"></center>
 
 ### Raspberry Pi
 

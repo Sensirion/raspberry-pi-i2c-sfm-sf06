@@ -169,10 +169,10 @@ int16_t sfm_sf06_start_no2_o2_continuous_measurement(uint16_t volume_fraction) {
         return error;
     }
 
-    offset = sensirion_i2c_add_command_to_buffer(buffer, offset, 0x3639);
+    offset = sensirion_i2c_add_command_to_buffer(&buffer[0], offset, 0x3639);
 
-    offset =
-        sensirion_i2c_add_uint16_t_to_buffer(buffer, offset, volume_fraction);
+    offset = sensirion_i2c_add_uint16_t_to_buffer(&buffer[0], offset,
+                                                  volume_fraction);
 
     error = sensirion_i2c_write_data(SFM_SF06_I2C_ADDRESS, &buffer[0], offset);
     if (error) {
@@ -194,12 +194,12 @@ int16_t sfm_sf06_start_c02_02_continuous_measurement(uint16_t volume_fraction) {
         return error;
     }
 
-    offset = sensirion_i2c_add_command_to_buffer(buffer, offset, 0x3646);
+    offset = sensirion_i2c_add_command_to_buffer(&buffer[0], offset, 0x3646);
 
-    offset =
-        sensirion_i2c_add_uint16_t_to_buffer(buffer, offset, volume_fraction);
+    offset = sensirion_i2c_add_uint16_t_to_buffer(&buffer[0], offset,
+                                                  volume_fraction);
 
-    error = sensirion_i2c_write_data(SFM_SF06_I2C_ADDRESS, buffer, offset);
+    error = sensirion_i2c_write_data(SFM_SF06_I2C_ADDRESS, &buffer[0], offset);
     if (error) {
         return error;
     }
