@@ -103,7 +103,7 @@ const sfm_sf06_t* init_driver(uint8_t i2c_address);
  * - SFM3003
  * - SFM4300
  * - SFM3119
- * - SFM3012
+ * - SFM3013
  * - SFM3019
  *
  * @note The first measurement result will be available after 12ms. Small
@@ -137,14 +137,14 @@ int16_t sfm_sf06_start_air_continuous_measurement(void);
 
 /**
  * sfm_sf06_start_n2o_continuous_measurement() - The sensor starts measuring
- * both N₂O (*HeOx for SMF3012*) flow and temperature and provides a status
- * word. All three measurement results can be read out through one single I2C
- * read when the continuous measurement is running. The specific command code
- * used for the start continuous measurement command selects the calibrated gas
- * or binary gas mixture (lookup table) for the flow signal. Supported by
+ * both N₂O (*HeOx for SMF3013-300-CLM*) flow and temperature and provides a
+ * status word. All three measurement results can be read out through one single
+ * I2C read when the continuous measurement is running. The specific command
+ * code used for the start continuous measurement command selects the calibrated
+ * gas or binary gas mixture (lookup table) for the flow signal. Supported by
  * products:
- * - SFM4300
- * - SFM3013 (HeOx)
+ * - SFM4300-20
+ * - SFM3013-300-CLM (HeOx)
  *
  * @note The first measurement result will be available after 12ms. Small
  * accuracy deviations (few % of reading) can occur during the first 30ms
@@ -161,7 +161,7 @@ int16_t sfm_sf06_start_n2o_continuous_measurement(void);
  * continuous measurement is running. The specific command code used for the
  * start continuous measurement command selects the calibrated gas or binary gas
  * mixture (lookup table) for the flow signal. Supported by products:
- * - SFM4300
+ * - SFM4300-20
  *
  * @note The first measurement result will be available after 12ms. Small
  * accuracy deviations (few % of reading) can occur during the first 30ms
@@ -192,12 +192,14 @@ int16_t sfm_sf06_start_air_o2_continuous_measurement(uint16_t volume_fraction);
 
 /**
  * sfm_sf06_start_n2o_o2_continuous_measurement() - The sensor starts measuring
- * the  N₂O / O₂ flow and temperature and provides a status word. All three
- * measurement results can be read out through one single I2C read when the
- * continuous measurement is running. The specific command code used for the
- * start continuous measurement command selects the calibrated gas or binary gas
- * mixture (lookup table) for the flow signal. Supported by products: - SFM4300
- * - SFM3013 (HeOx)
+ * the  N₂O / O₂ (*HeOx/O₂ for SMF3013-300-CLM*) flow and temperature and
+ * provides a status word. All three measurement results can be read out through
+ * one single I2C read when the continuous measurement is running. The specific
+ * command code used for the start continuous measurement command selects the
+ * calibrated gas or binary gas mixture (lookup table) for the flow signal.
+ * Supported by products:
+ * - SFM4300-20
+ * - SFM3013-300-CLM (HeOx)
  *
  * @param volume_fraction Volume fraction of O₂ in ‰.
  *
@@ -206,13 +208,13 @@ int16_t sfm_sf06_start_air_o2_continuous_measurement(uint16_t volume_fraction);
 int16_t sfm_sf06_start_n2o_o2_continuous_measurement(uint16_t volume_fraction);
 
 /**
- * sfm_sf06_start_c02_02_continuous_measurement() - The sensor starts measuring
+ * sfm_sf06_start_co2_o2_continuous_measurement() - The sensor starts measuring
  * the  CO₂ / O₂ flow and temperature and provides a status word. All three
  * measurement results can be read out through one single I2C read when the
  * continuous measurement is running. The specific command code used for the
  * start continuous measurement command selects the calibrated gas or binary gas
  * mixture (lookup table) for the flow signal. Supported by products:
- * - SFM4300
+ * - SFM4300-20
  *
  * @param volume_fraction Volume fraction of O₂ in ‰.
  *
@@ -270,7 +272,7 @@ int16_t sfm_sf06_read_measurement_data(float* flow, float* temperature,
 
 /**
  * sfm_sf06_update_concentration_set() - Together with the instruction
- * \a update_concentration_activate this instruction allows to update the
+ * *update_concentration_activate* this instruction allows to update the
  * concentration of a binary gas mixture dynamically, i.e. without exiting the
  * running measurement mode. This first instruction transmits the new
  * concentration value to the flow sensor. This instruction refers to *Transmit
@@ -285,7 +287,7 @@ int16_t sfm_sf06_update_concentration_set(uint16_t volume_fraction);
 
 /**
  * sfm_sf06_update_concentration_activate() - By executing this instruction the
- * previously with \a update_concentration_set set value becomes active. The
+ * previously with *update_concentration_set* set value becomes active. The
  * instruction resets the I2C address pointer to the regular result output
  * buffer such that the measurement data as described by the transfer
  * read_measurement_data are optained upon a subsequent read. This instruction
