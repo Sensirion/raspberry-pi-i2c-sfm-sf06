@@ -231,7 +231,7 @@ int16_t sfm_sf06_read_measurement_data(float* flow, float* temperature,
         &int_flow, &int_temperature, status_word);
     if (!error) {
         *temperature = int_temperature / 200.0;
-        *flow = (float)(int_flow - _driver.flow_offset) /
+        *flow = (float)(int_flow - (int32_t)_driver.flow_offset) /
                 _driver.flow_scaling_factor;
     }
     return error;
