@@ -1,50 +1,81 @@
-# Sensirion Raspberry Pi I2C SFM-SF06 Driver
+# Sensirion Raspberry Pi I²C SFM-SF06 Driver
 
-This document explains how to set up the SFM-SF06 sensor to run on a Raspberry Pi
-using the provided code. The current code example uses the sensor *SFM3119*
+The repository provides a driver for setting up a sensor of the SFM-SF06 family to run on a Raspberry Pi over I²C.
 
-[<center><img src="images/sfm3119.png" width="300px"></center>](https://github.com/Sensirion/raspberry-pi-i2c-sfm-sf06)
+<img src="images/SFM4300.png" width="300px">
 
-Other supported products are:
-
- * SFM3003
- * SFM4300
- * SFM3119
- * SFM3012
- * SFM3019
+Click [here](https://sensirion.com/products/product-categories/gas-flow-sensors/) to learn more about the Sensirion SFM-SF06 sensor family.
 
 
-Click [here](https://www.sensirion.com/flow-sensors/) to learn more about the Sensirion SFM-SF06 flow sensors.
+Not all sensors of this driver family support all measurements.
+In case a measurement is not supported by all sensors, the products that
+support it are listed in the API description.
 
 
-## Setup Guide
 
-### Connecting the Sensor
+## Supported sensor types
 
-Your sensor has the four different connectors: VCC, GND, SDA, SCL. Use
-the following pins to connect your SFM-SF06 (example product: SFM-3119):
+| Sensor name   | I²C Addresses  |
+| ------------- | -------------- |
+|[SFM4300](https://sensirion.com/products/catalog/?filter_series=77ed9322-c043-4eaf-ad3c-2b55aae69cdd)| **0x2A**, 0x2B, 0x2C, 0x2D|
+|[SFM3119](https://sensirion.com/products/catalog/SFM3119/)| **0x29**|
+|[SFM3003](https://sensirion.com/products/catalog/SEK-SFM3003/)| **0x28**, 0x2D|
+|[SFM3013](https://sensirion.com/products/catalog/SEK-SFM3013/)| **0x2F**|
+|[SFM3019](https://sensirion.com/products/catalog/SEK-SFM3019/)| **0x2E**|
 
- *SFM-SF06* |    *Raspberry Pi*
- :------:   | :------------------:
-   VCC      |        Pin 1
-   GND      |        Pin 6
-   SDA      |        Pin 3
-   SCL      |        Pin 5
+The following instructions and examples use a *SFM4300*.
 
 
-<center><img src="images/GPIO-Pinout-Diagram.png" width="900px"></center>
-<center><img src="images/sfm3119_pinout.png" width="450px"></center>
 
-### Raspberry Pi
+## Connect the sensor
+
+Your sensor has 6 different connectors: ADDR, SDA, GND, VDD, SCL, IRQn.
+Use the following pins to connect your SFM-SF06:
+
+| *SFM-SF06* | *Cable Color*  |   *Raspberry Pi*   |
+| :----------------: | -------------- | ------------------ |
+| ADDR |  | Pin 
+| SDA |  | Pin 3
+| GND |  | Pin 6
+| VDD |  | Pin 1
+| SCL |  | Pin 5
+| IRQn |  | Pin 
+
+
+<img src="images/raspi-i2c-pinout-3.3V.png" width="400px">
+
+
+### Detailed sensor pinout
+
+<img src="images/pinout_SFM4300.png" width="300px">
+
+| *Pin* | *Cable Color* | *Name* | *Description*  | *Comments* |
+|-------|---------------|:------:|----------------|------------|
+| 1 |  | ADDR |  | see data sheet section 4.1
+| 2 |  | SDA | I2C: Serial data input / output | Serial data, bidirectional
+| 3 |  | GND | Ground | 
+| 4 |  | VDD | Supply Voltage | 3.0V to 5.0V
+| 5 |  | SCL | I2C: Serial clock input | 
+| 6 |  | IRQn |  | Active low. see data sheet section 3.3
+
+
+
+## Quick start example
 
 - [Install the Raspberry Pi OS on to your Raspberry Pi](https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up)
-- [Enable the I2C interface in the raspi-config](https://www.raspberrypi.org/documentation/configuration/raspi-config.md)
-- Download the driver for the [Sensirion Github Page](https://github.com/Sensirion/raspberry-pi-i2c-sfm-sf06) and extract the `.zip` on your Raspberry Pi
-- The provided example is working with a SFM3119. In order to use the code with another product you need to change the used I2C address in the function call *init_driver()*. The list of supported I2C-addresses is found in the header *sfm_sf06_i2c.h*.
+- [Enable the I²C interface in the raspi-config](https://www.raspberrypi.org/documentation/configuration/raspi-config.md)
+- Download the SFM-SF06 driver from [Github](https://github.com/Sensirion/raspberry-pi-i2c-sfm-sf06) and extract the `.zip` on your Raspberry Pi
+- Connect the SFM-SF06 sensor as explained in the [section above](#connect-the-sensor)
+- - The provided example is working with a SFM4300, I²C address 0x2A.
+  In order to use the code with another product or I²C address you need to change it in the call sfm_sf06_init(ADDRESS) in
+  `sfm_sf06_i2c_example_usage.c`. The list of supported I²C-addresses is found in the header 
+  `sfm_sf06_i2c.h`.
+
 - Compile the driver
-    1. Open a [terminal](https://www.raspberrypi.org/documentation/usage/terminal/?)
-    2. Navigate to the driver directory. E.g. `cd ~/raspberry-pi-i2c-sfm-sf06`
-    3. Run the `make` command to compile the driver
+    1. Open a [terminal](https://projects.raspberrypi.org/en/projects/raspberry-pi-using/8)
+    2. Navigate to the driver directory. E.g. `cd ~/raspberry-pi-i2c-sfm_sf06`
+    3. Navigate to the subdirectory example-usage.
+    4. Run the `make` command to compile the driver
 
        Output:
        ```
@@ -54,25 +85,7 @@ the following pins to connect your SFM-SF06 (example product: SFM-3119):
        ```
 - Test your connected sensor
     - Run `./sfm_sf06_i2c_example_usage` in the same directory you used to
-      compile the driver.
-
-      Output:
-      ```
-     
-     Product identifier: 67371397
-     Serial number: 0, 0, 0, 0, 120, 209, 158, 83, 
-        flow	 temperature	      status
-      -24574	        5318	        3071
-      -24574	        5323	        3071
-      -24574	        5336	        3071
-      -24575	        5334	        3071
-      -24574	        5324	        3071
-      -24574	        5334	        3071
-      -24573	        5329	        3071
-      -24574	        5344	        3071
-
-      ...
-      ```
+      compile the driver. You should see the measurement values in the console.
 
 ## Troubleshooting
 
@@ -80,7 +93,9 @@ the following pins to connect your SFM-SF06 (example product: SFM-3119):
 
 If the execution of `make` in the compilation step 3 fails with something like
 
-> -bash: make: command not found
+```bash
+ make: command not found
+```
 
 your RaspberryPi likely does not have the build tools installed. Proceed as follows:
 
@@ -90,32 +105,31 @@ $ sudo apt-get upgrade
 $ sudo apt-get install build-essential
 ```
 
+
 ### Initialization failed
 
 If you run `./sfm_sf06_i2c_example_usage` but do not get sensor readings but something like this instead
 
 ```
-Error executing sfm_sf06_stop_continuous_measurement(): -1
-Error executing sfm_sf06_read_product_identifier(): -1
-Error executing sfm_sf06_start_o2_continuous_measurement(): -1
-
+Error executing stop_continuous_measurement(): -1
+Error executing read_product_identifier(): -1
+Error executing start_O2_continuous_measurement(): -1
 ...
 ```
-
 then go through the below troubleshooting steps.
 
 
 -   Ensure that you connected the sensor correctly: All cables are fully
     plugged in and connected to the correct pin.
--   Ensure that I2C is enabled on the Raspberry Pi. For this redo the steps on
-    "Enable the I2C interface in the raspi-config" in the guide above.
--   Ensure that your user account has read and write access to the I2C device.
+-   Ensure that I²C is enabled on the Raspberry Pi. For this redo the steps on
+    "Enable the I²C interface in the raspi-config" in the guide above.
+-   Ensure that your user account has read and write access to the I²C device.
     If it only works with user root (`sudo ./sfm_sf06_i2c_example_usage`), it's
     typically due to wrong permission settings. See the next chapter how to solve this.
 
-### Missing I2C permissions
+### Missing I²C permissions
 
-If your user is missing access to the I2C interface you should first verfiy
+If your user is missing access to the I²C interface you should first verfiy
 the user belongs to the `i2c` group.
 
 ```
@@ -147,3 +161,32 @@ to the file with your favorite editor.
 ```
 $ sudo vi local.rules
 ```
+
+## Contributing
+
+**Contributions are welcome!**
+
+We develop and test this driver using our company internal tools (version
+control, continuous integration, code review etc.) and automatically
+synchronize the master branch with GitHub. But this doesn't mean that we don't
+respond to issues or don't accept pull requests on GitHub. In fact, you're very
+welcome to open issues or create pull requests :)
+
+This Sensirion library uses
+[`clang-format`](https://releases.llvm.org/download.html) to standardize the
+formatting of all our `.c` and `.h` files. Make sure your contributions are
+formatted accordingly:
+
+The `-i` flag will apply the format changes to the files listed.
+
+```bash
+clang-format -i *.c *.h
+```
+
+Note that differences from this formatting will result in a failed build until
+they are fixed.
+
+
+## License
+
+See [LICENSE](LICENSE).
