@@ -66,7 +66,7 @@ Use the following pins to connect your SFM-SF06:
 - [Enable the I²C interface in the raspi-config](https://www.raspberrypi.org/documentation/configuration/raspi-config.md)
 - Download the SFM-SF06 driver from [Github](https://github.com/Sensirion/raspberry-pi-i2c-sfm-sf06) and extract the `.zip` on your Raspberry Pi
 - Connect the SFM-SF06 sensor as explained in the [section above](#connect-the-sensor)
-- - The provided example is working with a SFM4300, I²C address 0x2A.
+- The provided example is working with a SFM4300, I²C address 0x2A.
   In order to use the code with another product or I²C address you need to change it in the call sfm_sf06_init(ADDRESS) in
   `sfm_sf06_i2c_example_usage.c`. The list of supported I²C-addresses is found in the header 
   `sfm_sf06_i2c.h`.
