@@ -7,7 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.1.0] - 2023-10-31
+## [1.0.0] - 2023-10-30
+
+### Changed
+
+- Update code from driver generator version 0.34.0.
+- Use `uint8_t` instead of `uint16_t` for count in i2c hal.
+
+## [0.1.1] - 2023-06-01
+
+### Fixed
+
+- Fix conversion in rawMeasuredData to avoid overflow for flow values > 32 l/min
+
+## [0.1.0] - 2021-10-27
 
 Initial release
 
+[Unreleased]: https://github.com/Sensirion/raspberry-pi-i2c-sfm-sf06/compare/1.0.0..master
+[1.0.0]: https://github.com/Sensirion/raspberry-pi-i2c-sfm-sf06/compare/0.1.1..1.0.0
+[0.1.1]: https://github.com/Sensirion/raspberry-pi-i2c-sfm-sf06/compare/0.1.0..0.1.1
+[0.1.0]: https://github.com/Sensirion/raspberry-pi-i2c-sfm-sf06/releases/tag/0.1.0
