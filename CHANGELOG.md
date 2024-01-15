@@ -1,30 +1,37 @@
-# Changelog
-All notable changes to this project will be documented in this file.
+# CHANGELOG
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased] 
 
-## [Unreleased]
-
-## [1.0.0] - 2023-10-30
+## [3.0.0] - 2024-1-10
 
 ### Changed
 
-- Update code from driver generator version 0.34.0.
-- Use `uint8_t` instead of `uint16_t` for count in i2c hal.
+- Use new changelog format
+- Add missing User-API function
+- Add prefix for global symbols in C/Cpp code
+- Renaming of functions
+- Move usage examples to another folder
 
-## [0.1.1] - 2023-06-01
+## [0.1.1] - 2023-6-1
+
+### Changed
+
+- Update readme
 
 ### Fixed
 
-- Fix conversion in rawMeasuredData to avoid overflow for flow values > 32 l/min
+- Fix conversion function to avoid overflow
 
 ## [0.1.0] - 2021-10-27
 
-Initial release
+### Added
 
-[Unreleased]: https://github.com/Sensirion/raspberry-pi-i2c-sfm-sf06/compare/1.0.0..master
-[1.0.0]: https://github.com/Sensirion/raspberry-pi-i2c-sfm-sf06/compare/0.1.1..1.0.0
-[0.1.1]: https://github.com/Sensirion/raspberry-pi-i2c-sfm-sf06/compare/0.1.0..0.1.1
+- Provide initial version for SFM4300, SFM3xxx sensors
+
+[Unreleased]: https://github.com/Sensirion/raspberry-pi-i2c-sfm-sf06/compare/3.0.0...HEAD
+[3.0.0]: https://github.com/Sensirion/raspberry-pi-i2c-sfm-sf06/compare/0.1.1...3.0.0
+[0.1.1]: https://github.com/Sensirion/raspberry-pi-i2c-sfm-sf06/compare/0.1.0...0.1.1
 [0.1.0]: https://github.com/Sensirion/raspberry-pi-i2c-sfm-sf06/releases/tag/0.1.0
